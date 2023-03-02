@@ -1,6 +1,6 @@
 FROM debian:buster
 
-RUN apk update && apk add --no-cache mariadb mariadb-client
+RUN apk update && apk add --no-cache mariadb-server
 
 RUN mkdir /var/run/mysqld; \
     chmod 777 /var/run/mysqld; \
