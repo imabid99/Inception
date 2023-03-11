@@ -1,0 +1,14 @@
+server {
+    listen 443 ssl;
+
+    server_name imad.com;
+
+
+    ssl_certificate /etc/ssl/certs/nginx-selfsigned.crt;
+	ssl_certificate_key /etc/ssl/private/nginx-selfsigned.key;
+	ssl_protocols TLSv1.2;
+
+    root /var/www/html;
+    index index.html;
+
+}
