@@ -1,4 +1,4 @@
-#!/bin/sh
+#! /bin/sh
 
 if [ -d "/var/www/html/wop/wp-admin" ]; then
     rm -rf /var/www/html/wop/*
@@ -7,7 +7,7 @@ fi
 curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
 chmod +x wp-cli.phar
 mv wp-cli.phar /usr/local/bin/wp
-
+wp cli update
 mkdir -p /var/www/html/wop
 wp core download --path=/var/www/html/wop --allow-root
 

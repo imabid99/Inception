@@ -8,43 +8,43 @@ networks:
 
 services:
 
-  # nginx:
-  #     build: ./requirements/nginx/.
-  #     container_name: nginx 
-  #     image: nginx
-  #     ports:
-  #       - "443:443"      
-  #     restart: always
-      # depends_on:
-      #   - wordpress
-      # networks:
-      #   - my-inception
-      # volumes:
-      #   - my-volumes:/var/www/html/
-  # mariadb:
-  #     build: ./requirements/mariadb/.
-  #     container_name: mariadb
-  #     image: mariadb
-  #     restart: always
-  #     env_file:
-  #       - .env
-  #     networks:
-  #       - my-inception
-  #     volumes:
-  #       - my-volumes:/var/www/html/
-  # wordpress:
-  #     build: ./requirements/wordpress/.
-  #     container_name: wordpress
-  #     image: wordpress
-  #     restart: always
-  #     depends_on:
-  #       - mariadb
-  #     networks:
-  #       - my-inception
-  #     env_file:
-  #       - .env
-  #     volumes:
-  #       - my-volumes:/var/www/html/wop
+  nginx:
+      build: ./requirements/nginx/.
+      container_name: nginx 
+      image: nginx
+      ports:
+        - "443:443"      
+      restart: always
+      depends_on:
+        - wordpress
+      networks:
+        - my-inception
+      volumes:
+        - my-volumes:/var/www/html/
+  mariadb:
+      build: ./requirements/mariadb/.
+      container_name: mariadb
+      image: mariadb
+      restart: always
+      env_file:
+        - .env
+      networks:
+        - my-inception
+      volumes:
+        - my-volumes:/var/www/html/
+  wordpress:
+      build: ./requirements/wordpress/.
+      container_name: wordpress
+      image: wordpress
+      restart: always
+      depends_on:
+        - mariadb
+      networks:
+        - my-inception
+      env_file:
+        - .env
+      volumes:
+        - my-volumes:/var/www/html/wop
   mywebsite:
         build: ./requirements/bonus/mywebsite/.
         container_name: mywebsite
