@@ -9,3 +9,29 @@ services:
       ports:
         - "443:443"      
       restart: on-failure
+      depends_on:
+        - wordpress
+      networks:
+        -
+  mariadb:
+      build: ./requirements/mariadb/.
+      container_name: mariadb
+      # image: nginx
+      restart: on-failure
+      env_file:
+        - .env
+      networks:
+        -
+  wordpress:
+      build: ./requirements/wordpress/.
+      container_name: wordpress
+      # image: nginx
+      ports:
+        - "443:443"      
+      restart: on-failure
+      depends_on:
+        - mariadb
+      networks:
+        -
+            env_file:
+        - .env
