@@ -20,26 +20,21 @@ services:
       networks:
         - my-inception
       volumes:
-        - my-volumes:/var/www/html/wop
+        - my-volumes:/var/www/html/
   mariadb:
       build: ./requirements/mariadb/.
       container_name: mariadb
-      # image: nginx
-      ports:
-        - 3306
+      # image: mariadb
       restart: on-failure
       env_file:
         - .env
       networks:
         - my-inception
       volumes:
-        - my-volumes:/var/www/html/wop
+        - my-volumes:/var/www/html/
   wordpress:
       build: ./requirements/wordpress/.
-      container_name: wordpress
-      # image: nginx
-      ports:
-        - 9000     
+      container_name: wordpress   
       restart: on-failure
       depends_on:
         - mariadb

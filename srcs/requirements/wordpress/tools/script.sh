@@ -11,11 +11,11 @@ mv wp-cli.phar /usr/local/bin/wp
 mkdir -p /var/www/html/wop
 wp core download --path=/var/www/html/wop --allow-root
 
-wp config create --dbname=$DB_NAME --dbuser=$DB_USER --dbpass=$DB_PASSWORD --path="/var/www/html/wop" --dbhost=mariadb --allow-root
-
+wp config create --dbname="$DB_NAME" --dbuser="$DB_USER" --dbpass="$DB_PASSWORD" --path=/var/www/html/wop --dbhost=mariadb --allow-root
+echo imad
 wp core install  --url="$WP_URL" --title="$SITE_TITLE" --admin_user="$ADMIN_USER" --admin_password="$ADMIN_PASSWORD" --admin_email="$ADMIN_EMAIL" --path=/var/www/html/wop --skip-email --allow-root
 
-wp user create $MY_USER $MY_EMAIL --role=author --user_pass=$MY_PASSWORD --path="/var/www/html/wop" --allow-root
+wp user create "$MY_USER" "$MY_EMAIL" --role=author --user_pass="$MY_PASSWORD" --path=/var/www/html/wop --allow-root
 
 # wp theme install astra --activate --path="/var/www/html/wop" --allow-root
 wp theme install oceanwp --activate --path="/var/www/html/wop" --allow-root
