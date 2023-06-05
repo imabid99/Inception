@@ -1,6 +1,8 @@
 version: '3.3'
 
-# volumes:
+volumes:
+  my-volumes:
+
 networks:
   my-inception:
 
@@ -17,8 +19,8 @@ services:
         - wordpress
       networks:
         - my-inception
-      # volumes:
-      #   -
+      volumes:
+        - my-volumes:/var/www/html/wop
   mariadb:
       build: ./requirements/mariadb/.
       container_name: mariadb
@@ -30,8 +32,8 @@ services:
         - .env
       networks:
         - my-inception
-      # volumes:
-      #   -
+      volumes:
+        - my-volumes:/var/www/html/wop
   wordpress:
       build: ./requirements/wordpress/.
       container_name: wordpress
@@ -45,6 +47,6 @@ services:
         - my-inception
       env_file:
         - .env
-      # volumes:
-      #   -
+      volumes:
+        - my-volumes:/var/www/html/wop
 
