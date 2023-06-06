@@ -1,0 +1,55 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+}
+
+.container {
+    position: relative;
+    height: 100vh;
+    width: 100%;
+    background: rgb(44,111,159);
+    background: linear-gradient(90deg, rgba(44,111,159,1) 0%, rgba(3,150,255,1) 97%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.mycard {
+    text-align: center;
+    margin-top: 4rem;
+}
+
+.inception h1 {
+    color: aliceblue;
+    font-size: 8rem;
+    text-align: center;
+}
+
+.myimg {
+    padding: 16px;
+    border-radius: 15px;
+    transition: all .38s ease;
+}
+
+.myimg h3 {
+    font-size: 4rem;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+.social i{
+    width: 100%;
+    color: #fff;
+    font-size: 40px;
+    margin: 0 8px;
+    transition: all .38s ease;
+}
+
+.social i:hover {
+    color: blue;
+}

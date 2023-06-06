@@ -1,8 +1,20 @@
 version: '3.3'
 
+# volumes:
+#   my-volumes:
 volumes:
-  my-volumes:
-
+    mariadb-data:
+      driver: local
+      driver_opts:
+        type: none
+        o: bind
+        device: /Users/imabid/data/mariadb
+    wordpress-data:
+      driver: local
+      driver_opts:
+        type: none
+        o: bind
+        device: /Users/imabid/data/wordpress
 networks:
   my-inception:
 
@@ -15,12 +27,12 @@ services:
       ports:
         - "443:443"      
       restart: always
-      depends_on:
-        - wordpress
+      # depends_on:
+      #   - wordpress
       networks:
         - my-inception
       volumes:
-        - my-volumes:/var/www/html/
+        - wordpress-data:/var/www/html/wop
   mariadb:
       build: ./requirements/mariadb/.
       container_name: mariadb
@@ -31,20 +43,20 @@ services:
       networks:
         - my-inception
       volumes:
-        - my-volumes:/var/www/html/
+        - mariadb-data:/var/lib/mysql
   wordpress:
       build: ./requirements/wordpress/.
       container_name: wordpress
       image: wordpress
       restart: always
-      depends_on:
-        - mariadb
+      # depends_on:
+      #   - mariadb
       networks:
         - my-inception
       env_file:
         - .env
       volumes:
-        - my-volumes:/var/www/html/wop
+        - wordpress-data:/var/www/html/wop
   mywebsite:
         build: ./requirements/bonus/mywebsite/.
         container_name: mywebsite

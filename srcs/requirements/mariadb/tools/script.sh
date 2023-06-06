@@ -10,8 +10,6 @@ echo "GRANT ALL PRIVILEGES ON $DB_NAME.* TO '$DB_USER'@'%';" >> file_name
 echo "ALTER USER 'root'@'localhost' IDENTIFIED BY '1999';" >> file_name
 
 mysql < file_name
-
-sleep 1
+# sleep 1
+# sed -i "s/127.0.0.1/0.0.0.0/g" /etc/mysql/mariadb.conf.d/50-server.cnf
 kill $(pidof mysqld)
-
-mysqld

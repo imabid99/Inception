@@ -1,5 +1,8 @@
 #! /bin/sh
 
+# if [ -d "/var/www/html/wop/wp-admin" ]; then
+#     rm -rf /var/www/html/wop/*
+# fi
 if [ -d "/var/www/html/wop/wp-admin" ]; then
     rm -rf /var/www/html/wop/*
 fi
