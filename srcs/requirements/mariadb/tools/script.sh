@@ -1,7 +1,7 @@
 #!/bin/sh
 
 service mysql start
-
+sleep 1
 sed -i "s/127.0.0.1/0.0.0.0/g" /etc/mysql/mariadb.conf.d/50-server.cnf
 
 echo "CREATE DATABASE $DB_NAME ;" > file_name

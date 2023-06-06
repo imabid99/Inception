@@ -57,11 +57,11 @@ services:
         - .env
       volumes:
         - wordpress-data:/var/www/html/wop
-  mywebsite:
-        build: ./requirements/bonus/mywebsite/.
-        container_name: mywebsite
-        image: mywebsite
-        ports: 
-          - 8000:1337
+  # mywebsite:
+  #       build: ./requirements/bonus/mywebsite/.
+  #       container_name: mywebsite
+  #       image: mywebsite
+  #       ports: 
+  #         - 8000:1337
 
 

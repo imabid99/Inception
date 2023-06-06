@@ -3,8 +3,8 @@
 # if [ -d "/var/www/html/wop/wp-admin" ]; then
 #     rm -rf /var/www/html/wop/*
 # fi
-if [ -d "/var/www/html/wop/wp-admin" ]; then
-    rm -rf /var/www/html/wop/*
+if [ -d "/var/www/html/wop" ]; then
+    rm -rf /var/www/html/wop
 fi
 
 curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
