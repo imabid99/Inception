@@ -4,13 +4,11 @@ version: '3.3'
 #   my-volumes:
 volumes:
     mariadb-data:
-      driver: local
       driver_opts:
         type: none
         o: bind
         device: /Users/imabid/data/mariadb
     wordpress-data:
-      driver: local
       driver_opts:
         type: none
         o: bind
@@ -27,8 +25,8 @@ services:
       ports:
         - "443:443"      
       restart: always
-      # depends_on:
-      #   - wordpress
+      depends_on:
+        - wordpress
       networks:
         - my-inception
       volumes:
@@ -42,26 +40,35 @@ services:
         - .env
       networks:
         - my-inception
-      volumes:
-        - mariadb-data:/var/lib/mysql
+      # volumes:
+      #   - mariadb-data:/var/lib/mysql
   wordpress:
       build: ./requirements/wordpress/.
       container_name: wordpress
       image: wordpress
       restart: always
-      # depends_on:
-      #   - mariadb
+      depends_on:
+        - mariadb
       networks:
         - my-inception
       env_file:
         - .env
       volumes:
         - wordpress-data:/var/www/html/wop
-  # mywebsite:
-  #       build: ./requirements/bonus/mywebsite/.
-  #       container_name: mywebsite
-  #       image: mywebsite
-  #       ports: 
-  #         - 8000:1337
+  mywebsite:
+        container_name: mywebsite
+        build: ./requirements/bonus/mywebsite/.
+        image: mywebsite
+        ports: 
+          - 8000:1337
+  adminer:
+        container_name: adminer
+        build: requirements/bonus/adminer/.
+        image: adminer
+        ports:
+          - "8080:8080"
+        networks:
+          - my-inception
+        restart: always
 
 
