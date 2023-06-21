@@ -1,9 +1,5 @@
 #! /bin/sh
-# cd /var/www/html/wop
-# rm -rf *
-# if [ -d "/var/www/html/wop" ]; then
-#     rm -rf /var/www/html/wop
-# fi
+
 if [ -d "/var/www/html/wop/wp-admin" ]; then
   rm -rf /var/www/html/wop/*
 fi
@@ -14,14 +10,10 @@ mv wp-cli.phar /usr/local/bin/wp
 mkdir -p /var/www/html/wop
 wp core download --path=/var/www/html/wop --allow-root
 
-mv /wp-config.php /var/www/html/wop/wp-config.php
-# sleep 1
+cp /wp-config.php /var/www/html/wop/wp-config.php
 sed -i -r "s/mydb/$DB_NAME/1"  /var/www/html/wop/wp-config.php
 sed -i -r "s/myuser/$DB_USER/1" /var/www/html/wop/wp-config.php
 sed -i -r "s/mypwd/$DB_PASSWORD/1"  /var/www/html/wop/wp-config.php
-# wp config create --dbname="$DB_NAME" --dbuser="$DB_USER" --dbpass="$DB_PASSWORD" --path=/var/www/html/wop --dbhost=mariadb --allow-root
-# mv ./tools/wp-config.php /var/www/html/wop
-# docker cp ./tools/wp-config.php /var/www/html/wop/wp-config.php
 
 wp core install  --url=$WP_URL --title=$SITE_TITLE --admin_user=$ADMIN_USER --admin_password=$ADMIN_PASSWORD --admin_email=$ADMIN_EMAIL --path=/var/www/html/wop --skip-email --allow-root
 
