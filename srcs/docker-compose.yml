@@ -60,7 +60,7 @@ services:
         build: ./requirements/bonus/mywebsite/.
         image: mywebsite
         ports: 
-          - 8800:1337
+          - 1337:1337
   adminer:
         container_name: adminer
         build: requirements/bonus/adminer/.
@@ -76,10 +76,10 @@ services:
         image: cadvisor
         restart: always
         ports:
-          - 8082:8080
+          - 8082:8082
         volumes:
           - /:/rootfs:ro
-          - /var/run:/var/run:rw
+          - /var/run:/var/run:rwd
           - /sys:/sys:ro
           - /var/lib/docker/:/var/lib/docker:ro
         networks:
