@@ -1,7 +1,7 @@
 FROM  debian:buster
 
 RUN apt-get update && apt-get install -y wget && \
-    wget https://github.com/google/cadvisor/releases/download/v0.38.7/cadvisor -o /usr/bin/cadvisor && \
+    wget https://github.com/google/cadvisor/releases/download/v0.38.7/cadvisor -O /usr/bin/cadvisor && \
     chmod +x /usr/bin/cadvisor
 
 CMD ["/usr/bin/cadvisor"]

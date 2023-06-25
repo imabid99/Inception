@@ -24,7 +24,7 @@ services:
       image: nginx
       ports:
         - "443:443"      
-      restart: always
+      restart: on-failure
       depends_on:
         - wordpress
       networks:
@@ -35,7 +35,7 @@ services:
       build: ./requirements/mariadb/.
       container_name: mariadb
       image: mariadb
-      restart: always
+      restart: on-failure
       env_file:
         - .env
       networks:
@@ -46,7 +46,7 @@ services:
       build: ./requirements/wordpress/.
       container_name: wordpress
       image: wordpress
-      restart: always
+      restart: on-failure
       depends_on:
         - mariadb
       networks:
@@ -69,17 +69,17 @@ services:
           - "8080:8080"
         networks:
           - my-inception
-        restart: always
+        restart: on-failure
   cadvisor:
         build: ./requirements/bonus/cadvisor/.
         container_name: cadvisor
         image: cadvisor
-        restart: always
+        restart: on-failure
         ports:
-          - 8082:8082
+          - 6464:8080
         volumes:
           - /:/rootfs:ro
-          - /var/run:/var/run:rwd
+          - /var/run:/var/run:rw
           - /sys:/sys:ro
           - /var/lib/docker/:/var/lib/docker:ro
         networks:
@@ -88,12 +88,10 @@ services:
         build: ./requirements/bonus/redis/.
         container_name: redis
         image: redis
-        restart: always
+        restart: on-failure
         ports: 
           - 6379:6379
         volumes:
           - wordpress:/var/www/html/wop
         networks:
           - my-inception
-
-
