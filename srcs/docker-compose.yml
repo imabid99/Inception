@@ -1,18 +1,16 @@
 version: '3.3'
 
-# volumes:
-#   my-volumes:
 volumes:
-    wordpress:
+    v_wordpress:
       driver_opts:
         type: none
         o: bind
-        device: /Users/imabid/Desktop/Inception/srcs/wordpress
-    mariadb:
+        device: /Users/imabid/Desktop/Inception/wordpress
+    v_mariadb:
       driver_opts:
         type: none
         o: bind
-        device: /Users/imabid/Desktop/Inception/srcs/mariadb
+        device: /Users/imabid/Desktop/Inception/mariadb
 networks:
   my-inception:
 
@@ -23,14 +21,14 @@ services:
       container_name: nginx 
       image: nginx
       ports:
-        - "443:443"      
+        - 443:443
       restart: on-failure
       depends_on:
         - wordpress
       networks:
         - my-inception
       volumes:
-        - wordpress:/var/www/html/wop
+        - v_wordpress:/var/www/html/wop
   mariadb:
       build: ./requirements/mariadb/.
       container_name: mariadb
@@ -41,7 +39,7 @@ services:
       networks:
         - my-inception
       volumes:
-        - mariadb:/var/lib/mysql
+        - v_mariadb:/var/lib/mysql
   wordpress:
       build: ./requirements/wordpress/.
       container_name: wordpress
@@ -54,7 +52,7 @@ services:
       env_file:
         - .env
       volumes:
-        - wordpress:/var/www/html/wop
+        - v_wordpress:/var/www/html/wop
   mywebsite:
         container_name: mywebsite
         build: ./requirements/bonus/mywebsite/.
@@ -92,6 +90,21 @@ services:
         ports: 
           - 6379:6379
         volumes:
-          - wordpress:/var/www/html/wop
+          - v_wordpress:/var/www/html/wop
         networks:
           - my-inception
+  ftp:
+        container_name: ftp
+        build: ./requirements/bonus/ftp/
+        image: ftp
+        volumes:
+          - v_wordpress:/home/imabid/ftp/files
+        env_file:
+          - .env
+        ports:
+          - "21:21"
+          - "20:20"
+          - "40000-40005:40000-40005"
+        networks:
+          - my-inception
+        restart: on-failure

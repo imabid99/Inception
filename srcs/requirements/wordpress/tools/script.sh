@@ -21,8 +21,6 @@ wp config set WP_REDIS_HOST 'redis' --path=/var/www/html/wop --allow-root
 wp config set WP_REDIS_PORT '6379' --path=/var/www/html/wop --allow-root
 wp redis enable --path=/var/www/html/wop --allow-root
 chown -R www-data:www-data /var/www/html/wop
-chmod -R 755 /var/www/html/wop
-
 
 sed -i 's/\/run\/php\/php7.3-fpm.sock/ 9000/g' /etc/php/7.3/fpm/pool.d/www.conf
 
